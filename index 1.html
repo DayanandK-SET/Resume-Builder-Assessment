@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Resume Builder</h1>
+                <p>Create a professional resume in minutes</p>
+            </div>
+            <div class="header-actions">
+                <button id="generateBtn" class="btn btn-primary">Generate Resume</button>
+                <button id="downloadBtn" class="btn btn-secondary">Download PDF</button>
+                <button id="clearBtn" class="btn btn-danger">Clear All</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Form Section -->
+        <section class="section form-section">
+            <h2 class="section-title">Resume Details</h2>
+            
+            <form id="resumeForm" class="form">
+                <!-- Personal Information -->
+                <fieldset class="fieldset">
+                    <legend class="legend">Personal Information</legend>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                            <span class="error-message" id="nameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role/Title *</label>
+                            <input type="text" id="role" name="role" placeholder="Full Stack Developer" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone *</label>
+                            <input type="tel" id="phone" name="phone" placeholder="1234567890" required>
+                            <span class="error-message" id="phoneError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location" placeholder="New York, USA">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn URL</label>
+                            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
+                        </div>
+                        <div class="form-group">
+                            <label for="github">GitHub/Portfolio URL</label>
+                            <input type="url" id="github" name="github" placeholder="https://github.com/...">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="summary">Profile Summary *</label>
+                            <textarea id="summary" name="summary" placeholder="Brief summary about yourself..." maxlength="500" required></textarea>
+                            <div class="char-counter">
+                                <span id="charCount">0</span>/500
+                            </div>
+                            <span class="error-message" id="summaryError"></span>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Skills -->
+                <fieldset class="fieldset">
+                    <legend class="legend">Skills</legend>
+                    <div class="form-group">
+                        <label for="skillInput">Add a Skill</label>
+                        <div class="skill-input-group">
+                            <input type="text" id="skillInput" placeholder="e.g., JavaScript, React, Node.js">
+                            <button type="button" id="addSkillBtn" class="btn btn-outline">Add Skill</button>
+                        </div>
+                    </div>
+                    <div class="skills-container" id="skillsContainer"></div>
+                </fieldset>
+
+                <!-- Experience -->
+                <fieldset class="fieldset">
+                    <legend class="legend">Experience</legend>
+                    <div id="experienceContainer"></div>
+                    <button type="button" id="addExperienceBtn" class="btn btn-outline btn-add">+ Add Experience</button>
+                </fieldset>
+
+                <!-- Education -->
+                <fieldset class="fieldset">
+                    <legend class="legend">Education</legend>
+                    <div id="educationContainer"></div>
+                    <button type="button" id="addEducationBtn" class="btn btn-outline btn-add">+ Add Education</button>
+                </fieldset>
+
+                <!-- Projects -->
+                <fieldset class="fieldset">
+                    <legend class="legend">Projects</legend>
+                    <div id="projectsContainer"></div>
+                    <button type="button" id="addProjectBtn" class="btn btn-outline btn-add">+ Add Project</button>
+                </fieldset>
+
+                <!-- Extras -->
+                <fieldset class="fieldset">
+                    <legend class="legend">Extras (Optional)</legend>
+                    
+                    <!-- Certifications -->
+                    <div class="extras-subsection">
+                        <h4>Certifications</h4>
+                        <div class="form-group">
+                            <label for="certInput">Add a Certification</label>
+                            <div class="skill-input-group">
+                                <input type="text" id="certInput" placeholder="e.g., AWS Solutions Architect">
+                                <button type="button" id="addCertBtn" class="btn btn-outline">Add</button>
+                            </div>
+                        </div>
+                        <div class="skills-container" id="certsContainer"></div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="extras-subsection">
+                        <h4>Languages</h4>
+                        <div class="form-group">
+                            <label for="langInput">Add a Language</label>
+                            <div class="skill-input-group">
+                                <input type="text" id="langInput" placeholder="e.g., English (Fluent)">
+                                <button type="button" id="addLangBtn" class="btn btn-outline">Add</button>
+                            </div>
+                        </div>
+                        <div class="skills-container" id="langsContainer"></div>
+                    </div>
+
+                    <!-- Hobbies -->
+                    <div class="extras-subsection">
+                        <h4>Hobbies</h4>
+                        <div class="form-group">
+                            <label for="hobbies">Hobbies (comma-separated)</label>
+                            <input type="text" id="hobbies" name="hobbies" placeholder="e.g., Photography, Gaming, Reading">
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Preview Section -->
+        <section class="section preview-section">
+            <h2 class="section-title">Resume Preview</h2>
+            <div id="resumePreview" class="resume-preview">
+                <p class="preview-empty">Click "Generate Resume" to see preview</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
